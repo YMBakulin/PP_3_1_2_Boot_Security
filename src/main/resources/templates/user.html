@@ -4,8 +4,32 @@
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
+<h1 align="center">Welcome to User Page!</h1>
+<div align="center">
+    <table border="1" style = "width: 800px; border-style: solid;">
+        <tr style="text-align: center; vertical-align: middle; background: darkgrey;">
+            <th>Id</th>
+            <th>Username</th>
+            <th>Fullname</th>
+            <th>Age</th>
+            <th>E-mail</th>
+            <th>Roles</th>
+        </tr>
+        <tr th:style="${user}? 'font-weight: bold; text-align: center;'">
+            <td th:utext="${user.getId()}"></td>
+            <td th:utext="${user.getUsername()}"></td>
+            <td th:utext="${user.getFullname()}"></td>
+            <td th:utext="${user.getAge()}"></td>
+            <td th:utext="${user.getEmail()}"></td>
+            <td th:utext="${user.getStringOfAllUserRoles()}"></td>
+        </tr>
 
+    </table>
+    <br>
+    <br>
+    <a style="font-size: 20px; font-weight: bold;" href="/logout">Press for logout</a>
+
+</div>
 
 </body>
 </html>

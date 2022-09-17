@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>Spring Security Example</title>
+</head>
+<body>
+<h2 align="center">Admin page</h2>
+<div align="center">
+  <table border="1" style = "width: 900px; border-style: solid;">
+    <tr style="text-align: center; vertical-align: middle; background: darkgrey;">
+      <th>Id</th>
+      <th>Username</th>
+      <th>Fullname</th>
+      <th>Age</th>
+      <th>E-mail</th>
+      <th>Roles</th>
+      <th>Edit</th>
+      <th>Remove</th>
+    </tr>
+    <tr th:each="user : ${users}"
+        th:style="${user}? 'font-weight: bold; text-align: center;'">
+      <td th:utext="${user.getId()}"></td>
+      <td th:utext="${user.getUsername()}"></td>
+      <td th:utext="${user.getFullname()}"></td>
+      <td th:utext="${user.getAge()}"></td>
+      <td th:utext="${user.getEmail()}"></td>
+      <td th:utext="${user.getStringOfAllUserRoles()}"></td>
+      <td><a th:href="@{/{id}/edit (id=${user.getId()})}">Edit</a></td>
+      <td><a style="color:red" th:href="@{/{id}/delete (id=${user.getId()})}">Delete</a></td>
+    </tr>
+
+  </table>
+  <br>
+  <br>
+  <a style="font-size: 20px; font-weight: bold;" href="/new">Add new user</a>
+  <br>
+  <br>
+  <br>
+  <a style="font-size: 20px; font-weight: bold;" href="/logout">Press for logout</a>
+</div>
+<p>
+
+
+</p>
+
+<p>
+
+
+</p>
+</body>
+</html>
