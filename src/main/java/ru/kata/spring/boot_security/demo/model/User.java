@@ -9,8 +9,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
-
 
 @Entity
 @Table(name="users")
@@ -44,7 +44,7 @@ public class User implements UserDetails{
     private String email;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
-            CascadeType.DETACH}, fetch = FetchType.EAGER)
+            CascadeType.DETACH}, fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -152,6 +152,19 @@ public class User implements UserDetails{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
+    }
+
+    public String getStringOfRoles(User user) {
+        StringBuilder str = new StringBuilder();
+        Set<Role> roles = user.getRoles();
+        Iterator<Role> iterator = roles.iterator();
+        while (iterator.hasNext()) {
+            str.append(iterator.next().getRole().substring(5));
+            if (iterator.hasNext()){
+                str.append(", ");
+            }
+        }
+        return str.toString();
     }
 
     @Override

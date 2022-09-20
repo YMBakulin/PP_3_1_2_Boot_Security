@@ -39,10 +39,10 @@
         <br>
 
         <tr>
-            <td th:each="role : ${roles}">
+            <td th:each="role : ${allRoles}">
                 <input type="checkbox" th:field="*{roles}"
-                       th:value="${role.id}">
-                <label th:text="${role.role}"></label>
+                       th:value="${role.getId()}">
+                <label th:text="${role.getRole()}"></label>
             </td>
         </tr>
 
